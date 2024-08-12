@@ -21,10 +21,12 @@ def newTask(request):
             task = form.save(commit=False)
             task.done = 'doing'
             task.save()
-            return redirect('/')
+            return redirect('/')  # Corrigido para usar redirect
     else:
         form = TaskForm()
-        return render(request, 'tasks/addtask.html', {'form': form})
+    
+    return render(request, 'tasks/addtask.html', {'form': form})  # Movido fora do else
+
 
 def editTask(request, id):
     task = get_object_or_404(Task, pk=id)

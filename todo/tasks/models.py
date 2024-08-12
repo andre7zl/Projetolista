@@ -9,6 +9,7 @@ class Task(models.Model):
 
     title = models.CharField(max_length=255)
     description = models.TextField()
+    date = models.DateTimeField()
     done = models.CharField(
         max_length=5,
         choices=STATUS,

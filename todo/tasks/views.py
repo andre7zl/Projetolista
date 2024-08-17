@@ -55,5 +55,8 @@ def deleteTask(request, id):
 def helloWorld(request):
     return HttpResponse('Hello World!')
 
+def home(request):
+    return render(request, 'tasks/home.html')
+
 def yourName(request, name):
     return render(request, 'tasks/yourname.html', {'name':name})

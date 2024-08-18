@@ -11,4 +11,5 @@ urlpatterns = [
     path('list/edit/<int:id>', views.editTask, name="edit-task"),
     path('list/delete/<int:id>', views.deleteTask, name="delete-task"),
     path('yourname/<str:name>', views.yourName, name='your-name'),
+    path('api/tasks/', views.task_events, name='task_events'),
 ]

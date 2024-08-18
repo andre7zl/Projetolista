@@ -2,8 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .forms import TaskForm
 from django.contrib import messages
-
+from django.http import JsonResponse
 from .models import Task
+from .models import Task
+from datetime import timedelta
 
 def taskList(request):
     tasks = Task.objects.all().order_by('-created_at')
@@ -21,11 +23,11 @@ def newTask(request):
             task = form.save(commit=False)
             task.done = 'doing'
             task.save()
-            return redirect('task-list')  # Corrigido para usar redirect
+            return redirect('task-list') 
     else:
         form = TaskForm()
     
-    return render(request, 'tasks/addtask.html', {'form': form})  # Movido fora do else
+    return render(request, 'tasks/addtask.html', {'form': form})
 
 
 def editTask(request, id):
@@ -65,12 +67,17 @@ def task_events(request):
     tasks = Task.objects.all()
     events = []
 
+def task_events(request):
+    tasks = Task.objects.all()
+    events = []
+
     for task in tasks:
         events.append({
             'title': task.title,
             'start': task.start_date.isoformat(),
-            'end': task.end_date.isoformat(),
+            'end': (task.end_date + timedelta(days=1)).isoformat(),
             'description': task.description,
         })
 
     return JsonResponse(events, safe=False)
+

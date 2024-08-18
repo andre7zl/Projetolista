@@ -27,14 +27,19 @@
 
 <!-- Inicialização do calendário -->
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            events: '/events/'
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: '/api/tasks/',  // URL para carregar os eventos
+                eventClick: function(info) {
+                    alert('Evento: ' + info.event.title + '\nDescrição: ' + info.event.extendedProps.description);
+                }
+            });
+
+            calendar.render();
         });
-        calendar.render();
-    });
 </script>
 
 {% endblock %}

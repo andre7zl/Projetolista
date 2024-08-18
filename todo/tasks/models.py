@@ -10,8 +10,10 @@ class Task(models.Model):
 
     title = models.CharField(max_length=255)
     description = models.TextField()
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
+    start_date = models.DateField()
+    end_date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
     done = models.CharField(
         max_length=5,
         choices=STATUS,

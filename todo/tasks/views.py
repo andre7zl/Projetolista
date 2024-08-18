@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.http import JsonResponse
 from .models import Task
 from .models import Task
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 def taskList(request):
     tasks = Task.objects.all().order_by('-created_at')
@@ -57,6 +57,9 @@ def deleteTask(request, id):
 def helloWorld(request):
     return HttpResponse('Hello World!')
 
+def calendar(request):
+    return render(request, 'tasks/calendar.html')
+
 def home(request):
     return render(request, 'tasks/home.html')
 
@@ -72,10 +75,12 @@ def task_events(request):
     events = []
 
     for task in tasks:
+        start_datetime = datetime.combine(task.start_date, task.start_time)
+        end_datetime = datetime.combine(task.end_date, task.end_time)
         events.append({
             'title': task.title,
-            'start': task.start_date.isoformat(),
-            'end': (task.end_date + timedelta(days=1)).isoformat(),
+            'start': start_datetime.isoformat(),
+            'end': end_datetime.isoformat(),
             'description': task.description,
         })
 

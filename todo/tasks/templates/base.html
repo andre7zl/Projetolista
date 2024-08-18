@@ -12,18 +12,14 @@
 </head>
 <body>
     <div class="d-flex">
+
       <!-- Sidebar -->
-      <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 200px; min-height: 100vh;">
+      <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 200px; height: 100vh; position: fixed;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
           <span class="fs-4">CEI</span>
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
-          <li class="nav-item">
-            <a href="#" class="nav-link active" aria-current="page">
-              Home
-            </a>
-          </li>
           <li>
             <a href="{% url 'task-list' %}" class="nav-link text-white">
               Lista de Eventos
@@ -61,7 +57,8 @@
       </div>
       
       <!-- Main Content -->
-      <div class="flex-grow-1">
+      <div class="flex-grow-1" style="margin-left: 200px;">
+        
         <!-- Content Area -->
         <div class="p-3">
           {% block content %}

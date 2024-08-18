@@ -3,12 +3,13 @@
 {% block title %}Lista de Tarefas{% endblock %}
 
 {% block content %}
+
 <div class="offset-1 col-10 list-div">
     <h1>Lista de Eventos</h1>
     <div class="row mb-3">
         <!-- Botão de adicionar tarefa -->
         <div class="col-auto btn-primary">
-            <a id="add-link" href="newtask/" class="btn btn-primary d-flex align-items-center">
+            <a id="add-link" href="{% url 'new-task' %}" class="btn btn-primary d-flex align-items-center">
                 <i class="fas fa-plus me-2"></i> Adicionar tarefa
             </a>
         </div>
@@ -39,8 +40,8 @@
                         <span>{{ task.date }}</span>
                     </div>
                     <div class="col-auto">
-                        <a href="delete/{{ task.id }}" class="text-danger me-2"><i class="fas fa-trash"></i></a>
-                        <a href="edit/{{ task.id }}" class="text-warning"><i class="fas fa-edit"></i></a>
+                        <a href="{% url 'delete-task' task.id %}" class="text-danger me-2"><i class="fas fa-trash"></i></a>
+                        <a href="{% url 'edit-task' task.id %}" class="text-warning"><i class="fas fa-edit"></i></a>
                     </div>
                 </div>
             </div>

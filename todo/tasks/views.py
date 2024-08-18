@@ -21,7 +21,7 @@ def newTask(request):
             task = form.save(commit=False)
             task.done = 'doing'
             task.save()
-            return redirect('/')  # Corrigido para usar redirect
+            return redirect('task-list')  # Corrigido para usar redirect
     else:
         form = TaskForm()
     
@@ -37,7 +37,7 @@ def editTask(request, id):
 
         if(form.is_valid()):
             task.save()
-            return redirect('/')
+            return redirect('task-list')
         else:
             return render(request, 'task/edittask.html', {'form': form, 'task': task})
     else:
@@ -49,7 +49,7 @@ def deleteTask(request, id):
 
     messages.info(request, 'Tarefa deletada com sucesso.')
 
-    return redirect('/')
+    return redirect('task-list')
 
 
 def helloWorld(request):
@@ -60,3 +60,17 @@ def home(request):
 
 def yourName(request, name):
     return render(request, 'tasks/yourname.html', {'name':name})
+
+def task_events(request):
+    tasks = Task.objects.all()
+    events = []
+
+    for task in tasks:
+        events.append({
+            'title': task.title,
+            'start': task.start_date.isoformat(),
+            'end': task.end_date.isoformat(),
+            'description': task.description,
+        })
+
+    return JsonResponse(events, safe=False)
